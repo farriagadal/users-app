@@ -10,6 +10,9 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { LoadingSpinerComponent } from './shared/loading-spiner/loading-spiner.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,8 @@ import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
     ListUsersComponent,
     CreateUserComponent,
     LoginComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    LoadingSpinerComponent
   ],
   imports: [
     BrowserModule,
@@ -28,6 +32,8 @@ import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     
   ],
   providers: [

@@ -7,11 +7,6 @@
     <input class="form-control" placeholder="Email" autofocus [(ngModel)]="user.username" type="email" name="email" formControlName="email" >
     <label class="sr-only">Contraseña</label>
     <input class="form-control" placeholder="Contraseña" [(ngModel)]="user.password" type="password" name="password" formControlName="password">
-    <div class="checkbox mb-3">
-      <label>
-        <input type="checkbox" value="remember-me"> Recordar cuenta
-      </label>
-    </div>
     <button class="btn btn-md btn-primary btn-block" type="submit" (click)="loginUser()">Entrar</button>
     <a class="mt-5 mb-3 text-muted" href="https://github.com/farriagadal">&copy; farriagadal94@gmail.com</a>
   </form>

@@ -1,28 +1,48 @@
-<p>You can introduce custom directives for table headers to sort columns</p>
+<h3>Listado de empleados</h3>
 
-<table  *ngIf="employees.length > 0; else other_content" class="table table-striped">
-  <thead>
-  <tr>
-    <th>#</th>
-    <th>Nombre</th>
-    <th>Apellido</th>
-    <th>Run</th>
-  </tr>
-  </thead>
-  <tbody>
+<div  *ngIf="!isLoading; else loadingSpiner">
+  <table *ngIf="employees.length > 0; else usersEmpty" class="table table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Run</th>
+      </tr>
+    </thead>
+    <tbody>
       <tr *ngFor="let employee of employees">
         <td>{{ employee.id }}</td>
         <td>{{ employee.nombre }}</td>
         <td>{{ employee.apellido }}</td>
         <td>{{ employee.run }}</td>
       </tr>
+  
+    </tbody>
+  
+  </table>
+</div>
 
-  </tbody>
+<div class="d-flex justify-content-between p-2">
+  <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+    (pageChange)="refreshEmployees()">
+  </ngb-pagination>
 
-</table>
-<ng-template #other_content>
+  <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshEmployees()">
+    <option [ngValue]="2">2 items por página</option>
+    <option [ngValue]="4">4 items por página</option>
+    <option [ngValue]="6">6 items por página</option>
+  </select>
+</div>
+
+
+<ng-template #usersEmpty>
   <div class="users-empty">
-      <img src="assets/empty-box.svg">
-      <p>No hay usuarios creados</p>
+    <img src="assets/empty-box.svg">
+    <p>No hay usuarios creados</p>
   </div>
-  </ng-template>
+</ng-template>
+
+<ng-template #loadingSpiner>
+  <app-loading-spiner></app-loading-spiner>
+</ng-template>

@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
-import { NgbActiveModal, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-create-user',
@@ -17,7 +18,7 @@ export class CreateUserComponent implements OnInit {
   constructor(
     public activeModal: NgbActiveModal,
     private userService: UserService,
-    private modalService: NgbModal,
+    private toastr: ToastrService,
     ) {}
 
 
@@ -35,41 +36,46 @@ export class CreateUserComponent implements OnInit {
     })
   }
 
-  closeResult = '';
-  @ViewChild('content', {static: false}) inputNewMilestone: ElementRef; 
-  
-  open() {
-    this.modalService.open(this.inputNewMilestone).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }
 
   public createUser(): void {
     if (this.validateForm.status == 'VALID') {
       this.userService.createUser(this.employee).subscribe(data => {
           console.log(data)
-          this.open();
+          this.showSuccessCreation();
       }, error => {
         console.log(error);
-        this.open();
+        if (error.status === 500) {
+          this.showInternalError();
+        } else if (error.status === 401) {
+          this.showUnauthorizedError();
+        } else {
+          this.showGeneralError();
+        }
       });
+      this.activeModal.dismiss();
     } else {
-      alert('campos incompletos')
+      this.showInputRequired()
     }
   }
 
+  private showGeneralError(): void {
+    this.toastr.error('Error', 'Ha ocurrido un error en el servidor');
+  }
 
+  private showUnauthorizedError(): void {
+    this.toastr.error('Error 401', 'Su sesión ha expirado');
+  }
+
+  private showInternalError(): void {
+    this.toastr.error('Error 505', 'Ha ocurrido un error en el servidor');
+  }
+
+  private showSuccessCreation(): void {
+    this.toastr.success('Empleado Creado', 'Se ha creado un empleado con exito!');
+  }
+
+  private showInputRequired(): void {
+    this.toastr.info('Ingrese todos los datos', 'Debe ingresar correctamente los datos');
+  }
 
 }
