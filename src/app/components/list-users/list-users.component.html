@@ -1,1 +1,28 @@
-<p>list-users works!</p>
+<p>You can introduce custom directives for table headers to sort columns</p>
+
+<table  *ngIf="employees.length > 0; else other_content" class="table table-striped">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>Nombre</th>
+    <th>Apellido</th>
+    <th>Run</th>
+  </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let employee of employees">
+        <td>{{ employee.id }}</td>
+        <td>{{ employee.nombre }}</td>
+        <td>{{ employee.apellido }}</td>
+        <td>{{ employee.run }}</td>
+      </tr>
+
+  </tbody>
+
+</table>
+<ng-template #other_content>
+  <div class="users-empty">
+      <img src="assets/empty-box.svg">
+      <p>No hay usuarios creados</p>
+  </div>
+  </ng-template>

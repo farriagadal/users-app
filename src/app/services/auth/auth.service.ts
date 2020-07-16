@@ -23,18 +23,16 @@ export class AuthService {
     "Content-Type": "application/json"
   });
 
-  public loginUser(email: string, password: string): Observable<any> {
-    const url_api = `${this.api}/auth/login`;
+  public loginUser(username: string, password: string): Observable<any> {
+    const url_api = `${this.api}/api/login/`;
     return this.http
-      .post(url_api,{ email, password }, { headers: this.headers });
+      .post(url_api,{ username, password }, { headers: this.headers });
   }
 
   public setUserFromJWT(token: string): void {
     let token_data = decode(token);
     this.user.id = token_data.user_id;
-    this.user.nombre = token_data.nombre;
-    this.user.apellido = token_data.apellido;
-    this.user.run = token_data.run;
+    this.user.username = token_data.username;
   }
 
   public setToken(token: string): void {
@@ -46,46 +44,16 @@ export class AuthService {
   }
 
   public isLogged(): boolean {
-    if (this.user.id) {
+    if (this.getToken() !== null) {
       return true
     } else {
       return false
-    }  
-   } 
-
-  public getMyUser(): User {
-    return this.user;
-  }
+    }
+  } 
 
   public logoutUser(): void {
-    this.user.id = undefined;
     localStorage.removeItem("accessToken");
     this.router.navigate(['/login']);
-  }
-
-  public getMyId(): number {
-    return this.user.id;
-  }
-
-  public verifyUserToken(): Promise<void> {
-    return new Promise((resolve, reject) => {
-      const url_api = `${this.api}/auth/token/verify`;
-      const token = this.getToken();
-      if (token) {
-        console.log('enviando tokeen');
-        console.log(token);
-        this.http
-        .post(url_api, { token }, { headers: this.headers }).subscribe((data) => {
-          this.setUserFromJWT(data['token']);
-          resolve();
-        }, error => {
-          localStorage.removeItem("accessToken");
-          resolve();
-        });
-      } else {
-        resolve();
-      }
-    })
   }
 
 }

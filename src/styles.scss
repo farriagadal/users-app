@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+    background-color: #f5f5f5;
+}
+
+.modal-content{
+    animation-name: example;
+    animation-duration: 0.3s;
+  }
+  
+  @keyframes example {
+    0%   {transform: scale(0.5)}
+    100% {transform: scale(1)}
+  }
+
+  

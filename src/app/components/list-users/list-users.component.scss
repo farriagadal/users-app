@@ -1,0 +1,23 @@
+h1 {
+    margin: 20px 0;
+}
+
+.table {
+    border: solid 1px #dcdcdc;
+}
+
+.users-empty {
+    text-align: center;
+    width: 100%;
+    border: dashed 3px #c5c5c5;
+    margin: 30px auto;
+
+
+    img {
+        width: 150px;
+    }
+
+    p {
+        margin: 20px;
+    }
+}

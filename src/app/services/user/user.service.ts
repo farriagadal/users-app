@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, BehaviorSubject } from "rxjs";
 import { environment } from '../../../environments/environment';
 import { AuthService } from "../auth/auth.service";
 
@@ -9,6 +9,7 @@ import { AuthService } from "../auth/auth.service";
 })
 export class UserService {
 
+  public updateList = new BehaviorSubject(null);
   public user_role: number;
   private api: string;
 
@@ -22,13 +23,14 @@ export class UserService {
   });
 
   public createUser(new_user: any): Observable<any> {    
-    const url_api = `${this.api}/users`;
+    const url_api = `${this.api}/employee/`;
+    this.updateList.next(true)
     return this.http
       .post(url_api, new_user, { headers: this.headers });
   }
   
   public getAllUsers(): Observable<any> {
-    const url_api = `${this.api}/users`;
+    const url_api = `${this.api}/employee/`;
     return this.http.get(url_api, { headers: this.headers })
   }
 }

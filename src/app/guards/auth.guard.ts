@@ -14,8 +14,7 @@ export class AuthGuard implements CanActivate {
     private router: Router
   ) {}
 
-  async canActivate(@Inject(ActivatedRouteSnapshot) route: ActivatedRouteSnapshot,@Inject(RouterStateSnapshot) state: RouterStateSnapshot) {
-    await this.authService.verifyUserToken();
+  canActivate(@Inject(ActivatedRouteSnapshot) route: ActivatedRouteSnapshot,@Inject(RouterStateSnapshot) state: RouterStateSnapshot) {
     let isLogged =  this.authService.isLogged();
     if (isLogged) {
       return true;

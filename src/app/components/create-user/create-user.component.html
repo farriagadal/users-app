@@ -1,1 +1,52 @@
-<p>create-user works!</p>
+<!--  -->
+  <div class="modal-header">
+    <h4 class="modal-title">Crear Usuario</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form style="padding: 0px;" [formGroup]="validateForm">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label>Nombre</label>
+            <input class="form-control" [(ngModel)]="employee.nombre" type="text" name="name" formControlName="nombre">
+          </div>
+          <div class="form-group col-md-6">
+            <label>Apellido</label>
+            <input class="form-control" [(ngModel)]="employee.apellido" type="text" name="apellido" formControlName="apellido">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputAddress">Run</label>
+          <input class="form-control" [(ngModel)]="employee.run" type="number" name="run" formControlName="run">
+        </div>
+      </form>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary" (click)="createUser()">Crear</button>
+  </div>
+
+
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <label for="dateOfBirth">Date of birth</label>
+          <div class="input-group">
+            <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </ng-template>

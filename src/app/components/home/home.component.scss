@@ -1,0 +1,31 @@
+
+.container {
+    min-height: 100vh;
+    padding-top: 100px;
+
+    .btn-logout {
+        float: right;
+    }
+
+    h1 {
+        margin: 20px 0;
+    }
+
+    .button-container {
+        text-align: center;
+        
+        .btn-create {
+            margin-bottom: 10px;
+            padding: 7px 20px;
+    
+            img {
+                filter: invert(1);
+                height: 15px;
+                margin-bottom: 4px;
+                margin-right: 5px;
+            }
+        }
+    }
+
+    
+}
