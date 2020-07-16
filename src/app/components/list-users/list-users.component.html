@@ -1,6 +1,6 @@
 <h3>Listado de empleados</h3>
 
-<div  *ngIf="!isLoading; else loadingSpiner">
+<div *ngIf="!isLoading; else loadingSpiner">
   <table *ngIf="employees.length > 0; else usersEmpty" class="table table-striped">
     <thead>
       <tr>
@@ -17,9 +17,7 @@
         <td>{{ employee.apellido }}</td>
         <td>{{ employee.run }}</td>
       </tr>
-  
     </tbody>
-  
   </table>
 </div>
 
@@ -28,13 +26,12 @@
     (pageChange)="refreshEmployees()">
   </ngb-pagination>
 
-  <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshEmployees()">
+  <select class="custom-select" [(ngModel)]="pageSize" (ngModelChange)="refreshEmployees()">
     <option [ngValue]="2">2 items por página</option>
     <option [ngValue]="4">4 items por página</option>
     <option [ngValue]="6">6 items por página</option>
   </select>
 </div>
-
 
 <ng-template #usersEmpty>
   <div class="users-empty">

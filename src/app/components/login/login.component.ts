@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -17,9 +18,10 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
+    private toastr: ToastrService,
   ) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.initUserForm();
   }
 
@@ -31,7 +33,6 @@ export class LoginComponent implements OnInit {
   }
 
   public loginUser(): void { 
-    
     console.log(this.user)
     this.authService.loginUser(this.user.username, this.user.password).subscribe(data => {
       console.log(data);
@@ -39,9 +40,21 @@ export class LoginComponent implements OnInit {
       this.authService.setUserFromJWT(data.token)
       this.router.navigate(['/home']);
     }, error => {
-      alert('error');
-      console.log(error)
+      console.log(error);
+      if (error.status === 500) {
+        this.showInternalError();
+      } else {
+        this.showGeneralError();
+      }
     });
+  }
+
+  private showGeneralError(): void {
+    this.toastr.error('Usuario o contraseña inválida', 'Error al ingresar');
+  }
+
+  private showInternalError(): void {
+    this.toastr.error('Ha ocurrido un error en el servidor', 'Error 505');
   }
   
 

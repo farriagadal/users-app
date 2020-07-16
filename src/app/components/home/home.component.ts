@@ -11,22 +11,20 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 })
 export class HomeComponent implements OnInit {
 
-
   constructor(
     private modalService: NgbModal,
     private authService: AuthService
-    ) {}
+  ) {}
 
-  open() {
-    const modalRef = this.modalService.open(CreateUserComponent);
-    modalRef.componentInstance.name = 'World';
+  public open(): void {
+    this.modalService.open(CreateUserComponent);
   }
 
   public logOut(): void {
     this.authService.logoutUser();
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
   }
 
 }

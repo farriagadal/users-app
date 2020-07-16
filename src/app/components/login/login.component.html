@@ -1,12 +1,13 @@
-
 <div class="text-center">
   <form class="form-signin" [formGroup]="validateForm">
     <img id="logo" class="mb-4" src="assets/customer.svg" alt="">
     <h1>UsersApp</h1>
     <label class="sr-only">Email</label>
-    <input class="form-control" placeholder="Email" autofocus [(ngModel)]="user.username" type="email" name="email" formControlName="email" >
+    <input class="form-control" placeholder="Email" autofocus [(ngModel)]="user.username" type="email" name="email"
+      formControlName="email">
     <label class="sr-only">Contraseña</label>
-    <input class="form-control" placeholder="Contraseña" [(ngModel)]="user.password" type="password" name="password" formControlName="password">
+    <input class="form-control" placeholder="Contraseña" [(ngModel)]="user.password" type="password" name="password"
+      formControlName="password">
     <button class="btn btn-md btn-primary btn-block" type="submit" (click)="loginUser()">Entrar</button>
     <a class="mt-5 mb-3 text-muted" href="https://github.com/farriagadal">&copy; farriagadal94@gmail.com</a>
   </form>

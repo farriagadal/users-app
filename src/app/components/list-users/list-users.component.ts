@@ -47,6 +47,7 @@ export class ListUsersComponent implements OnInit {
       console.log(data)
      this.employees_data = data.empleados;
      this.collectionSize = this.employees_data.length;
+     this.page = this.employees_data.length;
      this.refreshEmployees();
    });
   }

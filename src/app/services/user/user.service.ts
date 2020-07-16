@@ -24,7 +24,7 @@ export class UserService {
 
   public createUser(new_user: any): Observable<any> {    
     const url_api = `${this.api}/employee/`;
-    this.updateList.next(true)
+    this.updateList.next(true);
     return this.http
       .post(url_api, new_user, { headers: this.headers });
   }

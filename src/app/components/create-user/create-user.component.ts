@@ -19,15 +19,14 @@ export class CreateUserComponent implements OnInit {
     public activeModal: NgbActiveModal,
     private userService: UserService,
     private toastr: ToastrService,
-    ) {}
+  ) {}
 
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.employee = new User;
     this.initUserForm();
   }
 
-  
   public initUserForm(): void {
     this.validateForm = new FormGroup({
       nombre: new FormControl(null, Validators.required),
@@ -35,7 +34,6 @@ export class CreateUserComponent implements OnInit {
       run: new FormControl(null, Validators.required),
     })
   }
-
 
   public createUser(): void {
     if (this.validateForm.status == 'VALID') {
